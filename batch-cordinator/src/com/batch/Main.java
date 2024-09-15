@@ -1,11 +1,14 @@
 package com.batch;
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.Scanner;
 
+import com.batch.entity.Address;
 import com.batch.entity.Batches;
 import com.batch.entity.Faculty;
 import com.batch.exception.AdminLoginException;
+import com.batch.exception.DuplicateEntryException;
 import com.batch.exception.InvalidException;
 import com.batch.exception.NullException;
 import com.batch.service.BatchesService;
@@ -42,7 +45,7 @@ public class Main {
 					faculty();
 					break;
 				case 3:
-					facultySignup();
+					facultySignup(sc, facultyMap, facultyService);
 					break;
 				case 0:
 					System.out.println("Successfully Existed from the System");
@@ -58,13 +61,35 @@ public class Main {
 
 	}
 
-	private static void facultySignup() {
-		// TODO Auto-generated method stub
+	private static void facultySignup(Scanner sc , Map<String , Faculty> faculty, FacultyService facultyService) {
 
-	}
+		System.out.println("Enter Following details");
+		System.out.println("Enter Your First Name (last name don't bother)");
+		String userName = sc.next();
+		System.out.println("Create a password");
+		String password = sc.next();
+		System.out.println("Enter Your City");
+		String city = sc.next();
+		System.out.println("Enter Your State");
+		String state = sc.next();
+		System.out.println("Enter Your ZipCode");
+		int zip = sc.nextInt();
+		System.out.println("Enter a Landmark");
+		String landmark = sc.next();
+		Address address = new Address(city, zip, state, landmark);
+		System.out.println("Enter Your Email");
+		String email = sc.next();
+		System.out.println("Enter Your Phone number");
+		int phoneNumber = sc.nextInt();
+		Faculty faculty1 = new Faculty(userName, password, email, phoneNumber, address);
+        try {
+            facultyService.signUp(faculty1, faculty);
+        } catch (IOException | DuplicateEntryException e) {
+			System.out.println(e.getMessage());
+        }
+    }
 
 	private static void faculty() {
-		// TODO Auto-generated method stub
 
 	}
 
