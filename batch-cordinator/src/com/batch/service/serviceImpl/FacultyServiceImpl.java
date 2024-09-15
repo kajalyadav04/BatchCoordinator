@@ -9,6 +9,7 @@ import java.util.Map;
 import com.batch.entity.Faculty;
 import com.batch.exception.DuplicateEntryException;
 import com.batch.exception.NullException;
+import com.batch.exception.WrongUserDetailsException;
 import com.batch.service.FacultyService;
 
 public class FacultyServiceImpl implements FacultyService {
@@ -40,6 +41,22 @@ public class FacultyServiceImpl implements FacultyService {
 			ObjectOutputStream facultySt = new ObjectOutputStream(new FileOutputStream("Faculty.ser"));
 			facultySt.writeObject(faculty);
 			facultySt.close();
+		}
+	}
+
+	@Override
+	public boolean login(String id, String name, String mail, String password, Map<String, Faculty> faculty) throws WrongUserDetailsException {
+		if(faculty.containsKey(id)) {
+
+			if(faculty.get(id).getPassword().equals(password)) {
+				return true;
+			}else {
+				throw new WrongUserDetailsException("You've Entered Wrong Credentials! Try Again...");
+			}
+
+		}
+		else {
+			throw new WrongUserDetailsException("Faculty is not registered! Register First...");
 		}
 	}
 
