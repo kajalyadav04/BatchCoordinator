@@ -7,10 +7,7 @@ import java.util.Scanner;
 import com.batch.entity.Address;
 import com.batch.entity.Batches;
 import com.batch.entity.Faculty;
-import com.batch.exception.AdminLoginException;
-import com.batch.exception.DuplicateEntryException;
-import com.batch.exception.InvalidException;
-import com.batch.exception.NullException;
+import com.batch.exception.*;
 import com.batch.service.BatchesService;
 import com.batch.service.FacultyService;
 import com.batch.service.serviceImpl.BatchesServiceImpl;
@@ -42,7 +39,7 @@ public class Main {
 					admin(sc, facultyMap, facultyService,batchesMap,batchesService);
 					break;
 				case 2:
-					faculty();
+					faculty(sc, facultyMap, facultyService);
 					break;
 				case 3:
 					facultySignup(sc, facultyMap, facultyService);
@@ -89,9 +86,23 @@ public class Main {
         }
     }
 
-	private static void faculty() {
-
-	}
+	private static void faculty(Scanner sc, Map<String, Faculty> facultyMap, FacultyService facultyService) {
+		System.out.println("Enter Following Details to LogIn to System...");
+		System.out.println("Enter Your ID");
+		String id = sc.next();
+		System.out.println("Enter Your UserName");
+		String name = sc.next();
+		System.out.println("Enter Your Email");
+		String email = sc.next();
+		System.out.println("Enter Your Password");
+		String pass = sc.next();
+        try {
+            facultyService.login(id,name, email , pass , facultyMap);
+			System.out.println("Faculty successfully logged-in");
+        } catch (WrongUserDetailsException e) {
+			System.out.println(e.getMessage());
+        }
+    }
 
 	private static void admin(Scanner sc, Map<String, Faculty> faculty, FacultyService facultyService, Map<String, Batches> batchesMap, BatchesService batchesService ) {
 		// TODO Auto-generated method stub
