@@ -23,6 +23,12 @@ public class BatchesServiceImpl implements BatchesService{
 		}
 		
 	}
+
+	@Override
+	public String createNewBatch(Map<String, Batches> batches, Batches newBatch) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 		
 	
 

@@ -14,8 +14,7 @@ public class Batches {
 	private int duration; 
 	private String endDate;
 	private String faculty;
-	public Batches(String id, String courseName, int noOfSeats, String startDate, int duration,
-			String faculty) {
+	public Batches(String id, String courseName, int noOfSeats, String startDate, int duration) {
 		super();
 		this.id = id;
 		this.courseName = courseName;
@@ -23,7 +22,6 @@ public class Batches {
 		this.startDate = startDate;
 		this.duration = duration;
 		this.endDate = endDateCalculate( startDate, duration);
-		this.faculty = faculty;
 	}
 	private String endDateCalculate(String startDate2, int duration2) {
 		DateTimeFormatter dtFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");

@@ -89,6 +89,9 @@ public class Main {
 				case 1:
 					adminViewAllFaculties(faculty, facultyService);
 					break;
+				case 2 :
+					adminCreateNewBatch(sc , batchesMap , batchesService);
+					break;
 				case 8:
 					adminViewAllBatches(batchesMap,batchesService);
 					break;
@@ -104,6 +107,25 @@ public class Main {
 
 //			System.out.println(loginSuccess);
 
+	}
+
+	private static void adminCreateNewBatch(Scanner sc, Map<String, Batches> batchesMap,
+			BatchesService batchesService) {
+		String string = null; 
+		System.out.println("Enter Following details to Create a New Course");
+		System.out.println("Enter a Unique ID :-");
+		String id = sc.next();
+		System.out.println("Enter Course Name :-");
+		String courseName = sc.next();
+		System.out.println("Enter Number of Seats for Course :- "+courseName);
+		int noOfSeats = sc.nextInt();
+		System.out.println("Enter a Start Date for Course :- "+courseName);
+		String localDate = sc.next();
+		System.out.println("Enter Duration for Course :- "+courseName);
+		int duration = sc.nextInt();
+		Batches newBatch = new Batches(id , courseName, noOfSeats, localDate , duration);
+		batchesService.createNewBatch(batchesMap, newBatch);
+		
 	}
 
 	private static void adminViewAllBatches(Map<String, Batches> batchesMap, BatchesService batchesService) {
