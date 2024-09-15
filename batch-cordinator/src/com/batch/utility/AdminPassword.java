@@ -1,7 +1,7 @@
 package com.batch.utility;
 
 public interface AdminPassword {
-	String username="viruska";
-	String password="123456Kay";
+	String username="k";
+	String password="1";
 
 }
