@@ -1,6 +1,5 @@
 package com.batch.service.serviceImpl;
 
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -16,7 +15,6 @@ public class FacultyServiceImpl implements FacultyService {
 
 	@Override
 	public void adminViewAllFac(Map<String, Faculty> faculty) throws NullException {
-		// TODO Auto-generated method stub
 		if(faculty!=null&&faculty.size()>0) {
 			for(Map.Entry<String, Faculty> entry : faculty.entrySet()) {
 				System.out.println(entry.getValue());
