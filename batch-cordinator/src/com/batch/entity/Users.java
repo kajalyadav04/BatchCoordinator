@@ -1,6 +1,8 @@
 package com.batch.entity;
 
-public class Users {
+import java.io.Serializable;
+
+public class Users implements Serializable {
 	private String username;
 	private String password;
 	private String email;

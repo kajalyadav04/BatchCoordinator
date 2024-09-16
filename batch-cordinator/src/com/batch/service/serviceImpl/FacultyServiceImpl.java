@@ -36,7 +36,7 @@ public class FacultyServiceImpl implements FacultyService {
 			faculty.put(fac.getFacId(), fac);
 			System.out.println("Faculty has Successfully been SignedUp.. "+"\n"+"Here are Details ");
 			System.out.println(fac);
-			ObjectOutputStream facultySt = new ObjectOutputStream(new FileOutputStream("Faculty.ser"));
+			ObjectOutputStream facultySt = new ObjectOutputStream(new FileOutputStream("faculty.ser"));
 			facultySt.writeObject(faculty);
 			facultySt.close();
 		}

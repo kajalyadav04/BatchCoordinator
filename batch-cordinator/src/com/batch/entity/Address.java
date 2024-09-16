@@ -1,6 +1,8 @@
 package com.batch.entity;
 
-public class Address {
+import java.io.Serializable;
+
+public class Address implements Serializable {
 
 	private String city;
 	private int pincode;
