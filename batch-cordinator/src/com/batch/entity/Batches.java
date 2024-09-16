@@ -14,8 +14,7 @@ public class Batches {
 	private int duration; 
 	private String endDate;
 	private String faculty;
-	public Batches(String id, String courseName, int noOfSeats, String startDate, int duration,
-			String faculty) {
+	public Batches(String id, String courseName, int noOfSeats, String startDate, int duration) {
 		super();
 		this.id = id;
 		this.courseName = courseName;

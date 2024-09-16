@@ -36,7 +36,7 @@ public class Main {
 				input = sc.nextInt();
 				switch (input) {
 				case 1:
-					admin(sc, facultyMap, facultyService,batchesMap,batchesService);
+					admin(sc, facultyMap, facultyService, batchesMap, batchesService);
 					break;
 				case 2:
 					faculty(sc, facultyMap, facultyService);
@@ -58,7 +58,7 @@ public class Main {
 
 	}
 
-	private static void facultySignup(Scanner sc , Map<String , Faculty> faculty, FacultyService facultyService) {
+	private static void facultySignup(Scanner sc, Map<String, Faculty> faculty, FacultyService facultyService) {
 
 		System.out.println("Enter Following details");
 		System.out.println("Enter Your First Name (last name don't bother)");
@@ -79,32 +79,30 @@ public class Main {
 		System.out.println("Enter Your Phone number");
 		int phoneNumber = sc.nextInt();
 		Faculty faculty1 = new Faculty(userName, password, email, phoneNumber, address);
-        try {
-            facultyService.signUp(faculty1, faculty);
-        } catch (IOException | DuplicateEntryException e) {
+		try {
+			facultyService.signUp(faculty1, faculty);
+		} catch (IOException | DuplicateEntryException e) {
 			System.out.println(e.getMessage());
-        }
-    }
+		}
+	}
 
 	private static void faculty(Scanner sc, Map<String, Faculty> facultyMap, FacultyService facultyService) {
 		System.out.println("Enter Following Details to LogIn to System...");
 		System.out.println("Enter Your ID");
 		String id = sc.next();
-		System.out.println("Enter Your UserName");
-		String name = sc.next();
-		System.out.println("Enter Your Email");
 		String email = sc.next();
 		System.out.println("Enter Your Password");
 		String pass = sc.next();
-        try {
-            facultyService.login(id,name, email , pass , facultyMap);
+		try {
+			facultyService.login(id, pass, facultyMap);
 			System.out.println("Faculty successfully logged-in");
-        } catch (WrongUserDetailsException e) {
+		} catch (WrongUserDetailsException e) {
 			System.out.println(e.getMessage());
-        }
-    }
+		}
+	}
 
-	private static void admin(Scanner sc, Map<String, Faculty> faculty, FacultyService facultyService, Map<String, Batches> batchesMap, BatchesService batchesService ) {
+	private static void admin(Scanner sc, Map<String, Faculty> faculty, FacultyService facultyService,
+			Map<String, Batches> batchesMap, BatchesService batchesService) {
 		// TODO Auto-generated method stub
 
 		boolean loginSuccess;
@@ -118,15 +116,20 @@ public class Main {
 						+ "Press '5' -----> to view a particular Course" + "\n"
 						+ "Press '6' ------> to Update a particular Course" + "\n"
 						+ "Press '7' ------> to Assign a faculty to a Course" + "\n"
-						+ "Press '8' ------> to view all  batches to a Course" + "\n"
 						+ "Press '0' ------> to Exit From Admin...");
 				selectOption = sc.nextInt();
 				switch (selectOption) {
 				case 1:
 					adminViewAllFaculties(faculty, facultyService);
 					break;
-				case 8:
-					adminViewAllBatches(batchesMap,batchesService);
+				case 2 :
+					adminCreateNewBatch(sc , batchesMap , batchesService);
+					break;
+				case 3:
+					adminViewAllBatches(batchesMap, batchesService);
+					break;
+				case 5 : 
+					viewAParticularBatch(sc , batchesMap , batchesService);
 					break;
 				default:
 					throw new InvalidException("please select correct option");
@@ -142,6 +145,40 @@ public class Main {
 
 	}
 
+	private static void viewAParticularBatch(Scanner sc, Map<String, Batches> batchesMap, BatchesService batchesService) {
+		System.out.println("Enter Id of the batch you want to See");
+		String id = sc.next();
+		Batches batches;
+		try {
+			batches = batchesService.viewABatchById(id, batchesMap);
+			System.out.println(batches);
+		} catch (EmptyListException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
+	private static void adminCreateNewBatch(Scanner sc, Map<String, Batches> batchesMap,
+			BatchesService batchesService) {
+		System.out.println("Enter Following Creds to Create a New Course");
+		System.out.println("Enter a Unique ID :-");
+		String id = sc.next();
+		System.out.println("Enter Course Name :-");
+		String courseName = sc.next();
+		System.out.println("Enter Number of Seats for Course :- "+courseName);
+		int noOfSeats = sc.nextInt();
+		System.out.println("Enter a Start Date for Course :- "+courseName);
+		String localDate = sc.next();
+		System.out.println("Enter Duration for Course :- "+courseName);
+		int duration = sc.nextInt();
+		Batches newBatch = new Batches(id , courseName, noOfSeats, localDate , duration);
+		try {
+			String responseString = batchesService.createNewBatch(batchesMap, newBatch);
+			System.out.println(responseString);
+		} catch (DuplicateEntryException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
 	private static void adminViewAllBatches(Map<String, Batches> batchesMap, BatchesService batchesService) {
 		// TODO Auto-generated method stub
 		try {
@@ -151,7 +188,7 @@ public class Main {
 			System.out.println(e.getMessage());
 //			e.printStackTrace();
 		}
-		
+
 	}
 
 	private static void adminViewAllFaculties(Map<String, Faculty> faculty, FacultyService facultyService) {

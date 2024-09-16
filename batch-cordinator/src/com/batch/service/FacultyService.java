@@ -12,6 +12,6 @@ import com.batch.exception.WrongUserDetailsException;
 public interface FacultyService {
 	public void adminViewAllFac(Map<String , Faculty> faculty) throws NullException ;
 	public void signUp(Faculty fac , Map<String , Faculty> faculty) throws IOException, DuplicateEntryException;
-	public boolean login(String id , String name ,String mail , String password, Map<String, Faculty> faculty) throws WrongUserDetailsException;
+	public boolean login( String id , String password, Map<String, Faculty> faculty) throws WrongUserDetailsException;
 
 }

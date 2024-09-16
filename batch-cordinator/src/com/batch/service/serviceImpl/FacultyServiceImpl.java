@@ -45,7 +45,7 @@ public class FacultyServiceImpl implements FacultyService {
 	}
 
 	@Override
-	public boolean login(String id, String name, String mail, String password, Map<String, Faculty> faculty) throws WrongUserDetailsException {
+	public boolean login(String id,  String password, Map<String, Faculty> faculty) throws WrongUserDetailsException {
 		if(faculty.containsKey(id)) {
 
 			if(faculty.get(id).getPassword().equals(password)) {
