@@ -1,5 +1,6 @@
 package com.batch.entity;
 
+
 import com.batch.utility.GenerateId;
 
 public class Faculty extends Users {
