@@ -26,9 +26,7 @@ public class Main {
 
 		System.out.println("Welcome to batch Management System");
 		try {
-
 			do {
-
 				System.out.println("Enter Your Preferences, What do you want ," + "\n"
 						+ "Press '1' -_-_-> For Admin Login" + "\n" + "Press '2' -_-_-> For Faculty Login ," + "\n"
 						+ "Press '3' -_-_-> For Faculty SignUp ," + "\n" + "Press '0' -_-_-> For Existing the System. "
@@ -53,9 +51,7 @@ public class Main {
 			} while (input != 0);
 		} catch (Exception e) {
 			System.out.println("error :" + e.getMessage());
-
 		}
-
 	}
 
 	private static void facultySignup(Scanner sc , Map<String , Faculty> faculty, FacultyService facultyService) {
@@ -132,16 +128,11 @@ public class Main {
 					break;
 				default:
 					throw new InvalidException("please select correct option");
-
 				}
-
 			} while (!(selectOption == 0));
 		} catch (AdminLoginException e) {
 			System.out.println(e.getMessage());
 		}
-
-//			System.out.println(loginSuccess);
-
 	}
 
 	private static void adminCreateNewBatch(Scanner sc, Map<String, Batches> batchesMap,
@@ -165,14 +156,12 @@ public class Main {
 					System.out.println(e.getMessage());
 				}
 	}
-
 	private static void adminViewAllBatches(Map<String, Batches> batchesMap, BatchesService batchesService) {
 		try {
 			batchesService.batchesViewAll(batchesMap);
 		} catch (NullException e) {
 			System.out.println(e.getMessage());
-		}
-		
+		}		
 	}
 
 	private static void adminViewAllFaculties(Map<String, Faculty> faculty, FacultyService facultyService) {
@@ -196,5 +185,4 @@ public class Main {
 		}
 		throw new AdminLoginException("Invalid data");
 	}
-
 }
