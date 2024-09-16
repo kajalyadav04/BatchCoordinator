@@ -105,7 +105,6 @@ public class Main {
     }
 
 	private static void admin(Scanner sc, Map<String, Faculty> faculty, FacultyService facultyService, Map<String, Batches> batchesMap, BatchesService batchesService ) {
-		// TODO Auto-generated method stub
 
 		boolean loginSuccess;
 		try {
@@ -143,23 +142,18 @@ public class Main {
 	}
 
 	private static void adminViewAllBatches(Map<String, Batches> batchesMap, BatchesService batchesService) {
-		// TODO Auto-generated method stub
 		try {
 			batchesService.batchesViewAll(batchesMap);
 		} catch (NullException e) {
-			// TODO Auto-generated catch block
 			System.out.println(e.getMessage());
-//			e.printStackTrace();
 		}
 		
 	}
 
 	private static void adminViewAllFaculties(Map<String, Faculty> faculty, FacultyService facultyService) {
-		// TODO Auto-generated method stub
 		try {
 			facultyService.adminViewAllFac(faculty);
 		} catch (NullException e) {
-			// TODO Auto-generated catch block
 			System.out.println(e.getMessage());
 		}
 
